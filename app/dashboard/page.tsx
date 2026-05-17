@@ -189,12 +189,19 @@ export default function DashboardPage() {
                     <p className={`font-bold text-${item.color}-800`}>{item.name}</p>
                     <p className="min-h-[3rem] text-sm my-2">{item.dish}</p>
                     <button 
-                      onClick={() => handleOrderAction(userProfile.id, item.id)}
-                      className={`mt-2 w-full py-2 rounded text-white font-bold ${userCurrentOrder === item.id ? 'bg-gray-400' : `bg-${item.color}-500`}`}
-                      disabled={userCurrentOrder === item.id}
-                    >
-                      {userCurrentOrder === item.id ? '已選購' : '點我預訂'}
-                    </button>
+  onClick={() => handleOrderAction(userProfile.id, item.id)}
+  className={`mt-4 w-full py-3 rounded-lg text-white font-bold transition-all
+    ${userCurrentOrder === item.id 
+      ? 'bg-gray-400 cursor-not-allowed' 
+      : item.id === 'A' ? 'bg-blue-600 hover:bg-blue-700' 
+      : item.id === 'B' ? 'bg-green-600 hover:bg-green-700' 
+      : 'bg-orange-500 hover:bg-orange-600'
+    }`}
+  disabled={userCurrentOrder === item.id}
+>
+  {userCurrentOrder === item.id ? '✅ 已選購' : '點我預訂'}
+</button>
+
                   </div>
                 ))}
               </div>
