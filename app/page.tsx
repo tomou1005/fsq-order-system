@@ -14,7 +14,9 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     
-    const email = `${employeeId.trim()}@company.com`
+    const email = employeeId.includes('@') 
+  ? employeeId.trim() 
+  : `${employeeId.trim()}@company.com`;
     
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -40,7 +42,7 @@ export default function LoginPage() {
             <label className="block text-sm font-medium text-gray-700">員工工號</label>
             <input
               type="text"
-              placeholder="請輸入工號"
+              placeholder="請輸入工號(例: 104001)"
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 text-black outline-none focus:ring-2 focus:ring-blue-500"
               value={employeeId}
               onChange={(e) => setEmployeeId(e.target.value)}
